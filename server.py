@@ -93,7 +93,8 @@ def process_image(file_path:str):
         first_line = file.readline()
         json_data = file.read()
 
-    
+    key=first_line.split()[0]
+
     # size = first_line.split(' ')[-1].strip('\n')
     # width, height = size.strip('()').split(', ')
     # width = int(width)
@@ -103,11 +104,11 @@ def process_image(file_path:str):
     data = json.loads(json_data)
 
     # 获取各个值
-    drawings = data['/root/nsfw/uploads/1000002952.jpg']['drawings']
-    hentai = data['/root/nsfw/uploads/1000002952.jpg']['hentai']
-    neutral = data['/root/nsfw/uploads/1000002952.jpg']['neutral']
-    porn = data['/root/nsfw/uploads/1000002952.jpg']['porn']
-    sexy = data['/root/nsfw/uploads/1000002952.jpg']['sexy']
+    drawings = data[key]['drawings']
+    hentai = data[key]['hentai']
+    neutral = data[key]['neutral']
+    porn = data[key]['porn']
+    sexy = data[key]['sexy']
     drawings_metric.set(drawings)
     hentai_metric.set(hentai)
     neutral_metric.set(neutral)

