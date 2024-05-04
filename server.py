@@ -50,7 +50,6 @@ def allowed_file(filename):
         
 @app.route('/upload', methods=['POST'])
 def upload():
-    request.files=fernet.decrypt(request.files)
     if 'file' not in request.files:
         abort(400)
     file = request.files['file']
