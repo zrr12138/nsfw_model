@@ -92,11 +92,11 @@ def process_image(file_path:str):
     with open('out', 'r') as file:
         first_line = file.readline()
 
-    # 解析第一行，获取大小信息
-    size = first_line.split(' ')[-1].strip('\n')
-    width, height = size.strip('()').split(', ')
-    width = int(width)
-    height = int(height)
+    # # 解析第一行，获取大小信息
+    # size = first_line.split(' ')[-1].strip('\n')
+    # width, height = size.strip('()').split(', ')
+    # width = int(width)
+    # height = int(height)
 
     # 读取剩余的 JSON 数据
     json_data = file.read()
@@ -120,5 +120,5 @@ def process_image(file_path:str):
 
 
 if __name__ == '__main__':
-    app.run(debug=False,port=8080,host="0.0.0.0")
+    app.run(debug=False,port=12138,host="0.0.0.0")
     
