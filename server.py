@@ -1,7 +1,7 @@
 from prometheus_client import Gauge, start_http_server
 import random
 import time
-
+from cryptography.fernet import Fernet
 
 # # 模拟指标更新
 # while True:
@@ -34,15 +34,23 @@ sexy_metric = Gauge('sexy', 'Sexy metric')
 # 启动一个HTTP服务器，导出指标
 start_http_server(8080)
 
+with open("key.txt","rb") as f:
+        key=f.read()
+
+fernet = Fernet(key)
+
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-           
+        
 @app.route('/upload', methods=['POST'])
 def upload():
+    request.files=fernet.decrypt(request.files)
     if 'file' not in request.files:
         abort(400)
     file = request.files['file']

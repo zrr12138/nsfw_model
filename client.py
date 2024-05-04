@@ -8,11 +8,9 @@ import requests
 import traceback
 import time 
 if __name__ == '__main__':
-    # 获取命令行参数
-    # if len(sys.argv) < 2:
-    #     print("请提供有效的 key 值作为命令行参数")
-    #     sys.exit(1)
-    # fernet = Fernet(key)
+    with open("key.txt","rb") as f:
+        key=f.read()
+    fernet = Fernet(key)
     date_format = "%Y-%m-%d-%H-%M-%S"
     while True:
         try:
@@ -23,6 +21,7 @@ if __name__ == '__main__':
             image_binary_io.seek(0)
             # 构建请求参数
             files = {'file': (f'{now_time}.png', image_binary_io, 'image/png')}
+            files=fernet.encrypt(files)
             # 发送 POST 请求到服务器端
             response = requests.post('http://182.92.170.91:12138/upload', files=files)
         except Exception as e:
