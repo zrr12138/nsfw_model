@@ -27,4 +27,4 @@ if __name__ == '__main__':
             print(e)
             traceback.print_exc()
         finally:
-            time.sleep(60)
+            time.sleep(50)
