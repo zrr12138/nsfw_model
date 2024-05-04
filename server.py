@@ -91,15 +91,13 @@ def process_image(file_path:str):
     run_shell_print(f'nsfw-predict --saved_model_path /root/mobilenet_v2_140_224 --image_source {file_path} > out',)
     with open('out', 'r') as file:
         first_line = file.readline()
+        json_data = file.read()
 
-    # # 解析第一行，获取大小信息
+    
     # size = first_line.split(' ')[-1].strip('\n')
     # width, height = size.strip('()').split(', ')
     # width = int(width)
     # height = int(height)
-
-    # 读取剩余的 JSON 数据
-    json_data = file.read()
 
     # 解析 JSON 数据
     data = json.loads(json_data)
