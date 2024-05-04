@@ -59,9 +59,13 @@ def upload():
     if file.filename == '':
         abort(400)
     if file and allowed_file(file.filename):
+        encrypted_image = file.read()  # Read the encrypted image data
+        # Decrypt the image data
+        decrypted_image_data = fernet.decrypt(encrypted_image)
         filename = secure_filename(file.filename)
         file_path=os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
+        with open(file_path, 'wb') as f:
+            f.write(decrypted_image_data)
         return process_image(file_path)
     else:
         abort(400)
