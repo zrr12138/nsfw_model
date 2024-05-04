@@ -61,6 +61,7 @@ def upload():
     if file and allowed_file(file.filename):
         encrypted_image = file.read()  # Read the encrypted image data
         # Decrypt the image data
+        print(type(encrypted_image))
         decrypted_image_data = fernet.decrypt(encrypted_image)
         filename = secure_filename(file.filename)
         file_path=os.path.join(app.config['UPLOAD_FOLDER'], filename)
