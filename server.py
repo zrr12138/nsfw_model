@@ -125,7 +125,14 @@ def process_image(file_path:str):
     neutral_metric.set(neutral)
     porn_metric.set(porn)
     sexy_metric.set(sexy)
-    os.remove(file_path)
+    
+    print("drawings:", drawings)
+    print("hentai:", hentai)
+    print("neutral:", neutral)
+    print("porn:", porn)
+    print("sexy:", sexy)
+
+    # os.remove(file_path)
     return "ok"
 
 
